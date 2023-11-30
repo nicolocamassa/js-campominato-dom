@@ -21,17 +21,17 @@ function tableGen(bomb, BOMBS_NUM) {
     switch (difficulty) {
         case 1:
             tableSize = 100;
-            container.style.width = '1000px'
+            container.style.width = '600px' /* Grandezza quadrati X righe [60px X 10righe] */
             break;
 
         case 2:
             tableSize = 81;
-            container.style.width = '900px'
+            container.style.width = '540px'
             break;
 
         case 3:
             tableSize = 49;
-            container.style.width = '700px'
+            container.style.width = '420px'
             break;
     }
 
@@ -59,12 +59,14 @@ function tableGen(bomb, BOMBS_NUM) {
                     clickedBomb = false;
                     console.log('Hai perso!')
                 } else {
-                    this.classList.add('bg-primary')
+                    this.style.backgroundColor = 'rgb(27, 27, 27)';
                     console.log(parseInt(squareNum.innerHTML))
                 }
             }
         })
     }
+
+    return tableSize;
 }
 
 function difficultyCheck() {
