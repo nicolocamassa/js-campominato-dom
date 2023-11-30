@@ -35,7 +35,7 @@ function tableGen(bomb, BOMBS_NUM) {
             break;
     }
 
-
+    let clickedBomb = true;
     /* Generazione dei 100 quadrati */
     for (let i = 1; i <= tableSize; i++) {
         let squareNum;
@@ -49,16 +49,20 @@ function tableGen(bomb, BOMBS_NUM) {
         squareNum.innerHTML = i;
 
         /* Al click del quadrato viene cambiato il colore e mostrato in console la sua posizione */
-        clickedBomb = false;
+
+
+
         divGen.addEventListener('click', function () {
-            
-                if(bomb.includes(parseInt(squareNum.innerHTML))) {
+            if (clickedBomb == true) {
+                if (bomb.includes(parseInt(squareNum.innerHTML))) {
+                    this.classList.add('bg-warning')
+                    clickedBomb = false;
                     console.log('Hai perso!')
-                    bombClicked = true;
                 } else {
-                    this.classList.toggle('bg-primary')
+                    this.classList.add('bg-primary')
                     console.log(parseInt(squareNum.innerHTML))
                 }
+            }
         })
     }
 }
@@ -89,7 +93,7 @@ const BOMBS_NUM = 16;
 let bomb = generateBomb(BOMBS_NUM);
 console.log(bomb);
 
-genBtn.addEventListener('click', function(){
+genBtn.addEventListener('click', function () {
     tableGen(bomb, BOMBS_NUM);
 })
 
