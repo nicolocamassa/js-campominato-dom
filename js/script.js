@@ -1,4 +1,4 @@
-function tableGen() {
+function tableGen(bomb, BOMBS_NUM) {
     /* Scompare il bottone */
     btnNone = document.getElementById('noneDisplayed');
     btnNone.classList.add('d-none');
@@ -34,36 +34,41 @@ function tableGen() {
 
     /* Generazione dei 100 quadrati */
     for (let i = 1; i <= tableSize; i++) {
+        let squareNum;
         /* Creiamo l'elemento div all'interno del container */
         const divGen = document.createElement("div");
         document.querySelector(".square-container").appendChild(divGen);
 
         /* Ogni quadrato avrà la propria classe identificandosi con il proprio numero */
         divGen.classList.add('square', 'square' + i);
-        const squareNum = document.querySelector(".square" + i);
-        squareNum.innerHTML = i
+        squareNum = document.querySelector(".square" + i);
+        squareNum.innerHTML = i;
 
         /* Al click del quadrato viene cambiato il colore e mostrato in console la sua posizione */
         divGen.addEventListener('click', function () {
-            this.classList.toggle('bg-primary')
-            console.log(`Quadrato ${squareNum.innerHTML} cliccato`)
+            if(bomb.includes(parseInt(squareNum.innerHTML))){
+                console.log('Hai perso!')
+            }else{
+                this.classList.toggle('bg-primary')
+                console.log(parseInt(squareNum.innerHTML))     
+            }
+            
         })
     }
-}
+
+}   
 
 function difficultyCheck(){
     let formValue = document.getElementById('difficulty').value;
     return formValue;
 }
 
-function generateBomb(){
+function generateBomb(BOMBS_NUM){
     /* Inizializzazione del vettore contenente le bombe */
-    debugger;
     let bombPosition = [];
-    const BOMBS_NUM = 16;
 
     /* Ciclo di generazione per le 16 bombe */
-    for(let i = 0; i<BOMBS_NUM; i++){
+    while(bombPosition.length != BOMBS_NUM){
         let bombNumber = Math.floor(Math.random()* 100 +1 );
 
         /* Controllo di numeri doppi nel vettore, se si verifica la condizione genera un altro numero*/
@@ -72,15 +77,16 @@ function generateBomb(){
         }
     }
 
-    return bombPosition
+    return bombPosition;
 }
 
-let bomb = generateBomb();
+const BOMBS_NUM = 16;
+let bomb = generateBomb(BOMBS_NUM);
+let generateTable = tableGen(bomb, BOMBS_NUM);
 console.log(bomb);
 
-function gameLoseChecker(bomb){
-    console.log(bomb);
-}
+
+
 
 
 
