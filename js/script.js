@@ -56,6 +56,33 @@ function difficultyCheck(){
     return formValue;
 }
 
+function generateBomb(){
+    /* Inizializzazione del vettore contenente le bombe */
+    let bombPosition = [];
+    const BOMBS_NUM = 16;
+
+    /* Ciclo di generazione per le 16 bombe */
+    for(let i = 0; i<BOMBS_NUM; i++){
+        let bombNumber;
+
+        /* Controllo di numeri doppi nel vettore, se si verifica la condizione genera un altro numero*/
+        if(!bombPosition.includes(bombNumber)){
+            bombNumber = Math.floor(Math.random()* 100 +1 )
+            bombPosition.push(bombNumber);
+        }
+    }
+
+    return bombPosition
+}
+
+let bomb = generateBomb();
+console.log(bomb);
+
+
+
+
+
+
 
 
 
