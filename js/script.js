@@ -1,22 +1,50 @@
 let genBtn = document.getElementById('genBtn');
 
-function tableGen(bomb, BOMBS_NUM) {
-    console.log('cliccato');
+function tableGen(bomb, cellNum) {
 
     /* Scompare il bottone */
     btnNone = document.getElementById('noneDisplayed');
     btnNone.classList.add('d-none');
 
-    /* Quantità dei quadrati */
-    let tableSize = 0;
+    let clickedBomb = true;
+    /* Generazione dei 100 quadrati */
+    for (let i = 1; i <= cellNum; i++) {
+        let squareNum;
+        /* Creiamo l'elemento div all'interno del container */
+        const divGen = document.createElement("div");
+        document.querySelector(".square-container").appendChild(divGen);
+
+        /* Ogni quadrato avrà la propria classe identificandosi con il proprio numero */
+        divGen.classList.add('square', 'square' + i);
+        squareNum = document.querySelector(".square" + i);
+        squareNum.innerHTML = i;
+
+        /* Al click del quadrato viene cambiato il colore e mostrato in console la sua posizione */
+        divGen.addEventListener('click', function () {
+            if (clickedBomb == true) {
+                if (bomb.includes(parseInt(squareNum.innerHTML))) {
+                    this.classList.add('bg-warning')
+                    clickedBomb = false;
+                    console.log('bomba')
+                } else {
+                    this.style.backgroundColor = 'rgb(27, 27, 27)';
+                    console.log(parseInt(squareNum.innerHTML))
+                }
+            }
+        })
+    }
+
+}
+
+function difficultyCheck() {
+    let formValue = document.getElementById('difficulty').value;
 
     /* Selezione della form */
-    let difficulty = parseInt(difficultyCheck());
-
+    let difficulty = parseInt(formValue);
     let container = document.querySelector('.square-container');
 
-    /* Quantità dei quadrati in base alla difficoltà */
-    console.log(difficulty)
+    /* Quantità dei quadrati */
+    let tableSize = 0;
 
     switch (difficulty) {
         case 1:
@@ -35,70 +63,36 @@ function tableGen(bomb, BOMBS_NUM) {
             break;
     }
 
-    let clickedBomb = true;
-    /* Generazione dei 100 quadrati */
-    for (let i = 1; i <= tableSize; i++) {
-        let squareNum;
-        /* Creiamo l'elemento div all'interno del container */
-        const divGen = document.createElement("div");
-        document.querySelector(".square-container").appendChild(divGen);
-
-        /* Ogni quadrato avrà la propria classe identificandosi con il proprio numero */
-        divGen.classList.add('square', 'square' + i);
-        squareNum = document.querySelector(".square" + i);
-        squareNum.innerHTML = i;
-
-        /* Al click del quadrato viene cambiato il colore e mostrato in console la sua posizione */
-
-
-
-        divGen.addEventListener('click', function () {
-            if (clickedBomb == true) {
-                if (bomb.includes(parseInt(squareNum.innerHTML))) {
-                    this.classList.add('bg-warning')
-                    clickedBomb = false;
-                    console.log('Hai perso!')
-                } else {
-                    this.style.backgroundColor = 'rgb(27, 27, 27)';
-                    console.log(parseInt(squareNum.innerHTML))
-                }
-            }
-        })
-    }
-
     return tableSize;
 }
 
-function difficultyCheck() {
-    let formValue = document.getElementById('difficulty').value;
-    return formValue;
-}
-
-function generateBomb(BOMBS_NUM) {
+function generateBomb(BOMBS_NUM,numCell) {
+    console.log(numCell);
     /* Inizializzazione del vettore contenente le bombe */
     let bombPosition = [];
 
     /* Ciclo di generazione per le 16 bombe */
-    while (bombPosition.length != BOMBS_NUM) {
-        let bombNumber = Math.floor(Math.random() * 100 + 1);
+    while (bombPosition.length != BOMBS_NUM) { /* Con il for generava array di lunghezza da 14 a 16 */
+        let bombNumber = Math.floor(Math.random() * numCell + 1);
 
         /* Controllo di numeri doppi nel vettore, se si verifica la condizione genera un altro numero*/
         if (!bombPosition.includes(bombNumber)) {
             bombPosition.push(bombNumber);
         }
     }
-
+    console.log(bombPosition);
     return bombPosition;
 }
 
+
 const BOMBS_NUM = 16;
-let bomb = generateBomb(BOMBS_NUM);
-console.log(bomb);
+
 
 genBtn.addEventListener('click', function () {
-    tableGen(bomb, BOMBS_NUM);
-})
-
+    let tableSize = difficultyCheck();
+    bomb = generateBomb(BOMBS_NUM, tableSize);
+    tableGen(bomb, tableSize);
+});
 
 
 
