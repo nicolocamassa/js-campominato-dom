@@ -76,7 +76,7 @@ restartBtn.addEventListener('click', function () {
     let table = document.querySelector('.square-container');
     table.innerHTML = '';
     btnNone.classList.remove('d-none');
-    restartBtn.classList.remove('d-none');
+    restartBtn.classList.add('d-none');
 });
 
 
