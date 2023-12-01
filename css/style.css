@@ -27,6 +27,7 @@ body{
     justify-content: center;
     align-items: center;
     transition-duration: 0.5s;
+    
 }
 
 .square:hover{

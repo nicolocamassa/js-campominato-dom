@@ -6,6 +6,10 @@ function tableGen(bomb, cellNum) {
     btnNone = document.getElementById('noneDisplayed');
     btnNone.classList.add('d-none');
 
+    let pointIndex = document.getElementById('point');
+    let points = 0;
+
+    let clicked = [];
     let clickedBomb = true;
     /* Generazione dei 100 quadrati */
     for (let i = 1; i <= cellNum; i++) {
@@ -18,6 +22,7 @@ function tableGen(bomb, cellNum) {
         divGen.classList.add('square', 'square' + i);
         squareNum = document.querySelector(".square" + i);
         squareNum.innerHTML = i;
+
 
         /* Al click del quadrato viene cambiato il colore e mostrato in console la sua posizione */
         divGen.addEventListener('click', function () {
@@ -38,8 +43,20 @@ function tableGen(bomb, cellNum) {
                     clickedBomb = false;
                 } else {
                     /* Modifica il colore delle celle cliccate */
+                    
                     this.style.backgroundColor = 'rgb(27, 27, 27)';
                     console.log(parseInt(squareNum.innerHTML))
+                    
+                    /* Controllo che il punteggio non incrementi al click della stessa cella */
+                    console.log(clicked);
+                    if(!clicked.includes(this.innerHTML)){
+                        clicked.push(this.innerHTML);
+                        points++
+                    }else{
+                        points = points;
+                    }
+                    
+                    pointIndex.innerHTML = 'Punteggio: ' + points;
                 }
             }
         })
