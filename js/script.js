@@ -23,7 +23,12 @@ function tableGen(bomb, cellNum) {
         divGen.addEventListener('click', function () {
             if (clickedBomb == true) {
                 if (bomb.includes(parseInt(squareNum.innerHTML))) {
-                    this.classList.add('bg-warning')
+                    for(let i=0; i<bomb.length; i++){
+                        let bombSelect = bomb[i];
+                        let bombClass = document.querySelector(".square" + bombSelect);
+                        bombClass.classList.add('bg-warning');
+                    }
+                    
                     clickedBomb = false;
                     console.log('bomba')
                 } else {
