@@ -11,6 +11,12 @@ function tableGen(bomb, cellNum) {
     let points = 0;
     let clicked = [];
     let clickedBomb = true;
+
+    /* Controllo per la vittoria */
+    if (points == cellNum - 16) {
+        pointIndex.innerHTML = 'Hai vinto!';
+    }
+
     /* Generazione dei 100 quadrati */
     for (let i = 1; i <= cellNum; i++) {
         let squareNum;
@@ -28,7 +34,6 @@ function tableGen(bomb, cellNum) {
         divGen.addEventListener('click', function () {
             if (clickedBomb == true) {
                 if (bomb.includes(parseInt(squareNum.innerHTML))) {
-                    /* debugger; */
                     this.classList.add('bg-warning');
 
                     for (let i = 0; i < bomb.length; i++) {
@@ -38,7 +43,7 @@ function tableGen(bomb, cellNum) {
                             let bombClass = document.querySelector(".square" + bombSelect);
                             bombClass.classList.add('bg-warning');
 
-                            if(i == bomb.length - 1){
+                            if (i == bomb.length - 1) {
                                 restartBtn.classList.remove('d-none');
                             }
                         }, i * 400)
@@ -49,16 +54,16 @@ function tableGen(bomb, cellNum) {
                     /* Modifica il colore delle celle cliccate */
                     this.style.backgroundColor = 'rgb(27, 27, 27)';
                     console.log(parseInt(squareNum.innerHTML))
-                    
+
                     /* Controllo che il punteggio non incrementi al click della stessa cella */
                     console.log(clicked);
-                    if(!clicked.includes(this.innerHTML)){
+                    if (!clicked.includes(this.innerHTML)) {
                         clicked.push(this.innerHTML);
                         points++
-                    }else{
+                    } else {
                         points = points;
                     }
-                    
+
                     pointIndex.innerHTML = 'Punteggio: ' + points;
                 }
             }
@@ -67,11 +72,11 @@ function tableGen(bomb, cellNum) {
 
 }
 
-restartBtn.addEventListener('click', function(){
+restartBtn.addEventListener('click', function () {
     let table = document.querySelector('.square-container');
     table.innerHTML = '';
     btnNone.classList.remove('d-none');
-    restartBtn.classList.add('d-none');
+    restartBtn.classList.remove('d-none');
 });
 
 
