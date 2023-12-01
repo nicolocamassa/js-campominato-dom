@@ -1,10 +1,10 @@
 let genBtn = document.getElementById('genBtn');
 let restartBtn = document.getElementById('restartBtn');
+btnNone = document.getElementById('noneDisplayed');
 
 function tableGen(bomb, cellNum) {
 
     /* Scompare il bottone */
-    btnNone = document.getElementById('noneDisplayed');
     btnNone.classList.add('d-none');
 
     let pointIndex = document.getElementById('point');
@@ -30,8 +30,6 @@ function tableGen(bomb, cellNum) {
                 if (bomb.includes(parseInt(squareNum.innerHTML))) {
                     /* debugger; */
                     this.classList.add('bg-warning');
-                    restartBtn.classList.remove('d-none');
-                    
 
                     for (let i = 0; i < bomb.length; i++) {
                         /* Mostra tutte le bombe ogni 400ms */
@@ -39,6 +37,10 @@ function tableGen(bomb, cellNum) {
                             let bombSelect = bomb[i];
                             let bombClass = document.querySelector(".square" + bombSelect);
                             bombClass.classList.add('bg-warning');
+
+                            if(i == bomb.length - 1){
+                                restartBtn.classList.remove('d-none');
+                            }
                         }, i * 400)
                     }
 
@@ -64,6 +66,13 @@ function tableGen(bomb, cellNum) {
     }
 
 }
+
+restartBtn.addEventListener('click', function(){
+    let table = document.querySelector('.square-container');
+    table.innerHTML = '';
+    btnNone.classList.remove('d-none');
+    restartBtn.classList.add('d-none');
+});
 
 
 function difficultyCheck() {

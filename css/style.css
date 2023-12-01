@@ -11,6 +11,15 @@ body{
     
 }
 
+section{
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .square-container{
     display: flex;
     flex-wrap: wrap;

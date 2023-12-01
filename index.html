@@ -11,31 +11,33 @@
 </head>
 
 <body>
-    <div class="container-width">
-        <h1 class="text-center">CAMPO MINATO</h1>
-        <div class="d-flex justify-content-center mt-2" id="noneDisplayed">
-            <input type="button" value="Gioca" class="btn btn_css border-dark text-white" id="genBtn">
+    <section>
+        <div class="container-width">
+            <h1 class="text-center mb-5">CAMPO MINATO</h1>
+            <div class="d-flex justify-content-center mt-2" id="noneDisplayed">
+                <input type="button" value="Gioca" class="btn btn_css border-dark text-white" id="genBtn">
+            </div>
+            <div class="d-flex justify-content-center mt-2" id="noneDisplayed">
+                <select id="difficulty" class="form-select difficulty-form bg-transparent text-white border-0 w-100">
+                    <option class="text-dark" value="1">Facile</option>
+                    <option class="text-dark" value="2">Media</option>
+                    <option class="text-dark" value="3">Difficile</option>
+                </select>
+            </div>
         </div>
-        <div class="d-flex justify-content-center mt-2" id="noneDisplayed">
-            <select id="difficulty" class="form-select difficulty-form bg-transparent text-white border-0 w-100">
-                <option class="text-dark" value="1">Facile</option>
-                <option class="text-dark" value="2">Media</option>
-                <option class="text-dark" value="3">Difficile</option>
-            </select>
+        <!-- Centramento della tabella -->
+        <div class="d-flex justify-content-center aling-self-center mt-5">
+            <!-- Contenitori dei quadrati -->
+            <div class="square-container text-white">
+                <!-- Quadrati generati da JS -->
+            </div>
         </div>
-    </div>
-    <!-- Centramento della tabella -->
-    <div class="d-flex justify-content-center aling-self-center mt-5">
-        <!-- Contenitori dei quadrati -->
-        <div class="square-container text-white">
-            <!-- Quadrati generati da JS -->
+    
+        <div class="container-width-game mt-5">
+            <input type="button" value="Rigioca" class="d-none btn btn_css border-dark text-white w-100 p-2 rounded-pill" id="restartBtn">
         </div>
-    </div>
-
-    <div class="container-width-game mt-5">
-        <input type="button" value="Rigioca" class="d-none btn btn_css border-dark text-white w-100 p-2 rounded-pill" id="restartBtn">
-    </div>
-    <div class="text-white text-center mt-2 fs-3" id="point">Punteggio: 0</div>
+        <div class="text-white text-center mt-1 fs-3" id="point">Punteggio: 0</div>
+    </section>
     <script src="./js/script.js" type="text/javascript"></script>
 </body>
 
