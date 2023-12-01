@@ -23,15 +23,21 @@ function tableGen(bomb, cellNum) {
         divGen.addEventListener('click', function () {
             if (clickedBomb == true) {
                 if (bomb.includes(parseInt(squareNum.innerHTML))) {
-                    for(let i=0; i<bomb.length; i++){
-                        let bombSelect = bomb[i];
-                        let bombClass = document.querySelector(".square" + bombSelect);
-                        bombClass.classList.add('bg-warning');
+                    /* debugger; */
+                    this.classList.add('bg-warning');
+
+                    for (let i = 0; i < bomb.length; i++) {
+                        /* Mostra tutte le bombe ogni 400ms */
+                        setTimeout(function () {
+                            let bombSelect = bomb[i];
+                            let bombClass = document.querySelector(".square" + bombSelect);
+                            bombClass.classList.add('bg-warning');
+                        }, i * 400)
                     }
-                    
+
                     clickedBomb = false;
-                    console.log('bomba')
                 } else {
+                    /* Modifica il colore delle celle cliccate */
                     this.style.backgroundColor = 'rgb(27, 27, 27)';
                     console.log(parseInt(squareNum.innerHTML))
                 }
@@ -71,7 +77,7 @@ function difficultyCheck() {
     return tableSize;
 }
 
-function generateBomb(BOMBS_NUM,numCell) {
+function generateBomb(BOMBS_NUM, numCell) {
     console.log(numCell);
     /* Inizializzazione del vettore contenente le bombe */
     let bombPosition = [];
