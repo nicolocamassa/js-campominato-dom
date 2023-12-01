@@ -1,4 +1,5 @@
 let genBtn = document.getElementById('genBtn');
+let restartBtn = document.getElementById('restartBtn');
 
 function tableGen(bomb, cellNum) {
 
@@ -8,7 +9,6 @@ function tableGen(bomb, cellNum) {
 
     let pointIndex = document.getElementById('point');
     let points = 0;
-
     let clicked = [];
     let clickedBomb = true;
     /* Generazione dei 100 quadrati */
@@ -30,6 +30,8 @@ function tableGen(bomb, cellNum) {
                 if (bomb.includes(parseInt(squareNum.innerHTML))) {
                     /* debugger; */
                     this.classList.add('bg-warning');
+                    restartBtn.classList.remove('d-none');
+                    
 
                     for (let i = 0; i < bomb.length; i++) {
                         /* Mostra tutte le bombe ogni 400ms */
@@ -43,7 +45,6 @@ function tableGen(bomb, cellNum) {
                     clickedBomb = false;
                 } else {
                     /* Modifica il colore delle celle cliccate */
-                    
                     this.style.backgroundColor = 'rgb(27, 27, 27)';
                     console.log(parseInt(squareNum.innerHTML))
                     
@@ -63,6 +64,7 @@ function tableGen(bomb, cellNum) {
     }
 
 }
+
 
 function difficultyCheck() {
     let formValue = document.getElementById('difficulty').value;
